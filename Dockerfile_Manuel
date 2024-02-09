@@ -13,6 +13,7 @@ RUN rm -f /lib/systemd/system/multi-user.target.wants/*;\
 RUN dnf install -y mysql-server
 
 COPY script.sh /usr/local/sbin
+RUN chmod +x /usr/local/sbin/script.sh
 
 VOLUME [ "/sys/fs/cgroup" ]
 CMD ["/usr/sbin/init"]
