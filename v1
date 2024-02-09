@@ -1,0 +1,18 @@
+dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+dnf install https://ci.tuleap.net/yum/tuleap/rhel/9/dev/x86_64/tuleap-community-release.rpm
+dnf install -y \
+  mysql-server \
+  tuleap \
+  tuleap-theme-burningparrot \
+  tuleap-theme-flamingparrot \
+  tuleap-plugin-tracker
+echo -e '[mysqld]\nsql-mode="NO_ENGINE_SUBSTITUTION"' > /etc/my.cnf.d/tuleap.cnf
+systemctl enable mysqld
+systemctl start mysqld
+mysqladmin -u root password
+/usr/share/tuleap/tools/setup.sh \
+  --configure \
+  --server-name=docker-tracker.net \
+  --mysql-server=localhost \
+  --mysql-password=secret
