@@ -12,7 +12,7 @@ echo
 read -p "Entrez le nom du serveur Tuleap : " tuleap_server_name
 
 # Configuration de MySQL avec le mot de passe fourni par l'utilisateur
-mysqladmin -u root -p"$mysql_password" password
+mysqladmin -u root -p password "$mysql_password"
 
 # Configuration de Tuleap
 /usr/share/tuleap/tools/setup.sh \
