@@ -10,7 +10,21 @@ RUN rm -f /lib/systemd/system/multi-user.target.wants/*;\
     rm -f /lib/systemd/system/basic.target.wants/*;\
     rm -f /lib/systemd/system/anaconda.target.wants/*
 
+# Installation des paquets nécessaires
+RUN dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+RUN dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+RUN dnf install -y https://ci.tuleap.net/yum/tuleap/rhel/9/dev/x86_64/tuleap-community-release.rpm
+RUN dnf install -y \
+        mysql-server \
+        tuleap \
+        tuleap-theme-burningparrot \
+        tuleap-theme-flamingparrot \
+        tuleap-plugin-tracker
+
 RUN dnf install -y mysql-server
+
+# Configuration de MySQL
+RUN echo -e '[mysqld]\nsql-mode="NO_ENGINE_SUBSTITUTION"' > /etc/my.cnf.d/tuleap.cnf
 
 COPY script.sh /usr/local/sbin
 RUN chmod +x /usr/local/sbin/script.sh
