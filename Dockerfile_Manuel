@@ -21,8 +21,6 @@ RUN dnf install -y \
         tuleap-theme-flamingparrot \
         tuleap-plugin-tracker
 
-RUN dnf install -y mysql-server
-
 # Configuration de MySQL
 RUN echo -e '[mysqld]\nsql-mode="NO_ENGINE_SUBSTITUTION"' > /etc/my.cnf.d/tuleap.cnf
 
