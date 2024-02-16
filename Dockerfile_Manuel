@@ -24,9 +24,7 @@ RUN dnf install -y \
 # Configuration de MySQL
 RUN echo -e '[mysqld]\nsql-mode="NO_ENGINE_SUBSTITUTION"' > /etc/my.cnf.d/tuleap.cnf
 
-RUN curl -LJO https://raw.githubusercontent.com/bpeytraud/docker_tracker/main/script.sh
-RUN mv script.sh /usr/local/sbin/
-RUN chmod +x /usr/local/sbin/script.sh
+COPY --chmod=750 script.sh /usr/local/sbin/script.sh
 
 VOLUME [ "/sys/fs/cgroup" ]
 CMD ["/usr/sbin/init"]
