@@ -1,10 +1,13 @@
 #!/bin/bash
 
 dnf install -y \
+        mysql-server \
         tuleap \
         tuleap-theme-burningparrot \
         tuleap-theme-flamingparrot \
         tuleap-plugin-tracker
+        
+echo -e '[mysqld]\nsql-mode="NO_ENGINE_SUBSTITUTION"' > /etc/my.cnf.d/tuleap.cnf
 
 # Configuration de MySQL
 systemctl enable mysqld
