@@ -15,11 +15,7 @@ RUN dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.n
 RUN dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm
 RUN dnf install -y https://ci.tuleap.net/yum/tuleap/rhel/9/dev/x86_64/tuleap-community-release.rpm
 RUN dnf install -y \
-        mysql-server \
-        tuleap \
-        tuleap-theme-burningparrot \
-        tuleap-theme-flamingparrot \
-        tuleap-plugin-tracker
+        mysql-server
 
 # Configuration de MySQL
 RUN echo -e '[mysqld]\nsql-mode="NO_ENGINE_SUBSTITUTION"' > /etc/my.cnf.d/tuleap.cnf
