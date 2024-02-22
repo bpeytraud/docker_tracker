@@ -1,5 +1,11 @@
 #!/bin/bash
 
+dnf install -y \
+        tuleap \
+        tuleap-theme-burningparrot \
+        tuleap-theme-flamingparrot \
+        tuleap-plugin-tracker
+
 # Configuration de MySQL
 systemctl enable mysqld
 systemctl start mysqld
