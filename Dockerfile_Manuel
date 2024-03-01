@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM quay.io/almalinux/almalinux:9
+FROM almalinux/9-init
 
 RUN rm -f /lib/systemd/system/multi-user.target.wants/*;\
     rm -f /etc/systemd/system/*.wants/*;\
@@ -14,9 +14,20 @@ RUN rm -f /lib/systemd/system/multi-user.target.wants/*;\
 RUN dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 RUN dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm
 RUN dnf install -y https://ci.tuleap.net/yum/tuleap/rhel/9/dev/x86_64/tuleap-community-release.rpm
+RUN dnf install -y \
+        mysql-server \
+        tuleap \
+        tuleap-theme-burningparrot \
+        tuleap-theme-flamingparrot \
+        tuleap-plugin-tracker
 
-COPY script.sh /usr/local/sbin
-RUN chmod +x /usr/local/sbin/script.sh
+# Configuration de MySQL
+RUN systemctl enable mysqld
+RUN systemctl disable tuleap
+RUN echo -e '[mysqld]\nsql-mode="NO_ENGINE_SUBSTITUTION"' > /etc/my.cnf.d/tuleap.cnf
+
+COPY --chmod=750 script.sh /usr/local/sbin/script.sh
+ENTRYPOINT /usr/local/sbin/script.sh
 
 VOLUME [ "/sys/fs/cgroup" ]
 CMD ["/usr/sbin/init"]
