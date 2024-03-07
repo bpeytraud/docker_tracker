@@ -19,6 +19,6 @@ mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$mysql_password';
 /usr/share/tuleap/tools/setup.sh \
   --configure \
   --server-name="$tuleap_server_name" \
-  --mysql-server=$mysql_server \
-  --mysql-password="$mysql_password"
+  --mysql-server="$mysql_server" \
+  --mysql-password="$mysql_password" \
   --assumeyes
