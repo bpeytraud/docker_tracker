@@ -1,0 +1,22 @@
+[Unit]
+Description=Setup Tuleap
+After=mysqld.service
+
+[Service]
+Type=simple
+User=root
+AmbientCapabilities=CAP_DAC_READ_SEARCH
+ExecStart=/usr/local/sbin/script.sh
+EnvironmentFile=/root/.env
+ProtectControlGroups=yes
+ProtectHostname=yes
+ProtectKernelLogs=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+ProtectSystem=yes
+SystemCallArchitectures=native
+MemoryDenyWriteExecute=yes
+PrivateDevices=yes
+
+[Install]
+WantedBy=multi-user.target
