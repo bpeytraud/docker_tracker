@@ -21,6 +21,10 @@ RUN dnf install -y \
         tuleap-theme-flamingparrot \
         tuleap-plugin-tracker
 
+#Configuration de systemd
+COPY --chmod=750 setup-tuleap.service /usr/lib/systemd/system/setup-tuleap.service
+RUN systemctl enable setup-tuleap.service
+
 # Configuration de MySQL
 RUN systemctl enable mysqld
 RUN systemctl disable tuleap
