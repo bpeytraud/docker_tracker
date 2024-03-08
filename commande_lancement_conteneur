@@ -1,4 +1,4 @@
 docker build -t docker_tracker .
 docker build --no-cache -t docker_tracker . #si on veut construire une nouvelle image
-docker run --rm -t --name foo -v /sys/fs/cgroup:/sys/fs/cgroup:rw --cap-add=sys_nice --mount type=tmpfs,destination=/run docker_tracker
+docker run --rm -t --name foo -v /sys/fs/cgroup:/sys/fs/cgroup:rw -v ./.env:/root/.env:ro --cap-add=sys_nice --mount type=tmpfs,destination=/run  docker_tracker
 docker exec -ti foo bash
